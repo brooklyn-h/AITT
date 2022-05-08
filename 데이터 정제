@@ -1,0 +1,26 @@
+#-*- coding:utf-8 -*-
+import pandas as pd
+pd.set_option('display.max_row', 500) # 전체 표 보기위함
+pd.set_option('display.max_columns', 100)
+
+df_sw=pd.read_excel('C:/Users/seongtae/Desktop/test/2022 소프트웨어학과 전공교과과정표.xlsx', header=None)
+df_sw=df_sw.drop([0,1,2,49,52,53])
+df_sw1=df_sw.iloc[:,[1,2,3,4]]
+df_sw1=df_sw1.rename(columns=df_sw1.iloc[0])
+df_sw1=df_sw1.drop(3)
+df_sw2=df_sw.iloc[:,[5,6,7,8]]
+df_sw2=df_sw2.rename(columns=df_sw2.iloc[0])
+df_sw2=df_sw2.drop(3)
+sw_table=pd.concat([df_sw1,df_sw2])
+sw_table=sw_table.dropna(thresh=1)
+sw_table.reset_index(inplace=False)
+sw_table=sw_table.rename(columns={'과 목 명':'과목명'})
+sw_table['이수구분'].loc[(sw_table['이수구분']=='공통교양필수')]='공필'
+sw_table['이수구분'].loc[(sw_table['이수구분']=='학문기초교양필수')]='기필'
+sw_table['이수구분'].loc[(sw_table['이수구분']=='전공필수')]='전필'
+sw_table['이수구분'].loc[(sw_table['이수구분']=='전공선택')]='전선'
+sw_table # 2022 전공교과과정표
+
+df=pd.read_csv('C:/Users/seongtae/Desktop/test/result2.csv', encoding='UTF8', header=None) #인코딩 방식 깨져서 보내주신 csv UTF로 전환해서 저장했습니다
+df.columns=['학수번호', '과목명', '이수구분', '학점', '학년', '교수명', '시간', '장소']
+df # 크롤링한 개설과목
