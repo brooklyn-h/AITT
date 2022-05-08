@@ -19,7 +19,8 @@ sw_table['이수구분'].loc[(sw_table['이수구분']=='공통교양필수')]='
 sw_table['이수구분'].loc[(sw_table['이수구분']=='학문기초교양필수')]='기필'
 sw_table['이수구분'].loc[(sw_table['이수구분']=='전공필수')]='전필'
 sw_table['이수구분'].loc[(sw_table['이수구분']=='전공선택')]='전선'
-sw_table # 2022 전공교과과정표
+sw_table
+sw_table.to_csv('C:/Users/seongtae/Desktop/test/2022 sw table.csv', encoding='utf-8-sig')
 
 df=pd.read_csv('C:/Users/seongtae/Desktop/test/result2.csv', encoding='UTF8', header=None) #인코딩 방식 깨져서 보내주신 csv UTF로 전환해서 저장했습니다
 df.columns=['학수번호', '과목명', '이수구분', '학점', '학년', '교수명', '시간', '장소']
