@@ -1,0 +1,21 @@
+#-*- coding:utf-8 -*-
+import pandas as pd
+pd.set_option('display.max_row', 500) # 전체 표 보기위함
+pd.set_option('display.max_columns', 100)
+
+df_sw=pd.read_excel('C:/Users/seongtae/Desktop/test/2022 소프트웨어학과 전공교과과정표.xlsx', header=None)
+df_sw=df_sw.drop([0,1,2,49,52,53])
+df_sw1=df_sw.iloc[:,[1,2,3,4]]
+df_sw1=df_sw1.rename(columns=df_sw1.iloc[0])
+df_sw1=df_sw1.drop(3)
+df_sw2=df_sw.iloc[:,[5,6,7,8]]
+df_sw2=df_sw2.rename(columns=df_sw2.iloc[0])
+df_sw2=df_sw2.drop(3)
+sw_table=pd.concat([df_sw1,df_sw2])
+sw_table=sw_table.dropna(thresh=1)
+sw_table.reset_index(inplace=True)
+sw_table #2022 교과과정표 정리
+
+df=pd.read_csv('C:/Users/seongtae/Desktop/test/result2.csv', encoding='UTF8', header=None) #인코딩 방식 깨져서 보내주신 csv UTF로 전환해서 저장했습니다
+df.columns=['학수번호', '교과목명', '이수구분', '학점', '학년', '교수명', '시간', '장소']
+df # result
